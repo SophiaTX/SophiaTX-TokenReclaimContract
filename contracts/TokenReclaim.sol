@@ -13,8 +13,10 @@ contract TokenReclaim{
             require( (b[i] >='a' && b[i] <='z') || (b[i] >='0' && b[i] <= '9') || b[i] == '-' || b[i] =='.'  );
         }
         require(bytes(pubKey).length <= 64 && bytes(pubKey).length >= 50 );
-        require(bytes(_ethToSphtx[msg.sender]).length == 0); //check that the address is not yet registered;
-        require(bytes(_accountToPubKey[name]).length == 0 ); //check that the name is not yet used
+
+        require(bytes(_ethToSphtx[msg.sender]).length == 0 || keccak256(bytes((_ethToSphtx[msg.sender]))) ==  keccak256(bytes(name)));//check that the address is not yet registered;
+
+        require(bytes(_accountToPubKey[name]).length == 0 || keccak256(bytes((_ethToSphtx[msg.sender]))) ==  keccak256(bytes(name))); //check that the name is not yet used
         _accountToPubKey[name] = pubKey;
         _ethToSphtx[msg.sender] = name;
         emit AccountRegister(msg.sender, name, pubKey);
