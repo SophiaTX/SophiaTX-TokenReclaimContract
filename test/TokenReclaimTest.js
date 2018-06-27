@@ -21,14 +21,12 @@ contract('TokenReclaimTest', function(accounts) {
             console.log(result);
         });
 
-        await tr.register("testaccount","DCT1i9qfyphRazsFqUHzT3DMWRQGLZ7vkrArLoGdRGYbDrgtGL2ie");
-        await tr.register("testaccount1", "DCT2dMvB9e1PRwE2rcfVXTBLR2rdphnR9U7DXxeqxVic5DzeWdzMd", {from: web3.eth.accounts[1]});
-        await assertRevert(tr.register("testaccount2", "DCT8i9qfyphRazsFqUHzT3DMWRQGLZ7vkrArLoGdRGYbDrgtGL2ie"));
-        await assertRevert(tr.register("", ""), {from: web3.eth.accounts[2]});
-        await assertRevert(tr.register("testaccount", "DCT8i9qfyphRazsFqUHzT3DMWRQGLZ7vkrArLoGdRGYbDrgtGL2ie"), {from: web3.eth.accounts[2]});
-        await assertRevert(tr.register("verylongaccountname", "DCT8i9qfyphRazsFqUHzT3DMWRQGLZ7vkrArLoGdRGYbDrgtGL2ie"), {from: web3.eth.accounts[2]});
-        await assertRevert(tr.register("testaccount3", "DCT8i9qfyphRazsFqUHzT3DMWRQGLZ7vkrArLoGdRGYbDrgtGL2ieDCT8i9qfyphRazsFqUHzT3DMWRQGLZ7vkrArLoGdRGYbDrgtGL2ie"), {from: web3.eth.accounts[2]});
-        await tr.register("testaccount2", "DCT3dMvB9e1PRwE2rcfVXTBLR2rdphnR9U7DXxeqxVic5DzeWdzMd", {from: web3.eth.accounts[2]});
+        await tr.register("DCT1i9qfyphRazsFqUHzT3DMWRQGLZ7vkrArLoGdRGYbDrgtGL2ie");
+        await tr.register("DCT2dMvB9e1PRwE2rcfVXTBLR2rdphnR9U7DXxeqxVic5DzeWdzMd", {from: web3.eth.accounts[1]});
+        await assertRevert(tr.register(""), {from: web3.eth.accounts[2]});
+        await tr.register("DCT8i9qfyphRazsFqUHzT3DMWRQGLZ7vkrArLoGdRGYbDrgtGL2ie"), {from: web3.eth.accounts[2]};
+        await assertRevert(tr.register("DCT8i9qfyphRazsFqUHzT3DMWRQGLZ7vkrArLoGdRGYbDrgtGL2ieDCT8i9qfyphRazsFqUHzT3DMWRQGLZ7vkrArLoGdRGYbDrgtGL2ie"), {from: web3.eth.accounts[2]});
+        await tr.register("DCT3dMvB9e1PRwE2rcfVXTBLR2rdphnR9U7DXxeqxVic5DzeWdzMd", {from: web3.eth.accounts[3]});
         
     })
 })
